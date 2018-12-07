@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>SelectAntal</title>
+</head>
+<body>
+
+
+<form method="post" action="/selectAntal" enctype="multipart/form-data" th:object="${list}">
+
+    <p th:each="product : ${list}">
+        <span><img th:src="${product.thumbLoc}+${product.image[0]}" style="width: 100px; height: 100px;"></span>
+        <span> <input type="number" name="number" value="${product.antal}"></span>
+
+    </p>
+
+    <input type="submit" value="Okay">
+</form>
+
+
+</body>
+</html>
