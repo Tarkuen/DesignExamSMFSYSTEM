@@ -17,37 +17,11 @@ public class LineEngine {
     private boolean found;
     private boolean create;
 
-    public String createOneProductLineFB(Product product) {
-        String salesline = "";
-        try {
-            String beskrivelse = product.getImage()[1].replaceAll(" ","%20");
-            product.setProductLine(salesline.concat(
-                    product.getServLoc() +
-                    product.getFacLoc() +
-                    '/' + beskrivelse+" "
-                            + String.valueOf(
-                    product.getAntal()) +
-                    "stk. "
-                            + product.getBeskrivelse())
-                    + product.getProductType()+" "
-                    + '\n'
-            );
-        } catch (NullPointerException ex) {
-            System.out.println(ex.getMessage());
-            if (product.getFacLoc().isEmpty() || product.getFacLoc() == null) {
-                System.out.println("\n");
-            } else if (product.getBeskrivelse().isEmpty() || product.getBeskrivelse() == null) {
-                System.out.println("\n");
-                System.out.println("Invalid File Name");
-                product.setBeskrivelse("*****NA");
-            }
-        }
-        return product.getProductLine();
-    }
-
-    public String createOneProductLinePF(Product product){
+    public String createOneProductLine(Product product){
         String salesline ="";
         try{
+
+
         product.setProductLine(salesline.concat("[img]"+product.getThumbLoc()+
                 product.getImage()[0] +
                 "[/img][url="+
@@ -59,7 +33,9 @@ public class LineEngine {
                 "stk. "+
                 product.getBeskrivelse()
                 +"[/url]")
-                +product.getProductType()
+                +'\n'
+                +'\n'
+                +'\n'
                 +'\n'
         );
         }catch (NullPointerException ex){
@@ -78,24 +54,15 @@ public class LineEngine {
             this.create=false;
         }
         this.create=true;
-
         return product.getProductLine();
     }
 
-    public void createProduct(String platform){
+    public void createProduct(){
         System.out.println("J_SYS: ATTEMPTING TO WRITE TO FILE @ "+ LocalDateTime.now().toString());
-        if(platform.equalsIgnoreCase("SMF")){
             for (Product product : productList) {
-                printWriter.write(createOneProductLinePF(product));
+                printWriter.write(createOneProductLine(product));
             }
             printWriter.flush();
-        }
-        if(platform.equalsIgnoreCase("Facebook")){
-            for (Product product : productList) {
-                printWriter.write(createOneProductLineFB(product));
-            }
-            printWriter.flush();
-        }
         System.out.println("J_SYS: COMPLETED PRODUCTION ON FILE # "+outputFile.getAbsolutePath());
     }
 
@@ -123,10 +90,6 @@ public class LineEngine {
 
     public boolean isFound() {
         return found;
-    }
-
-    public File getOutputFile() {
-        return outputFile;
     }
 
     public void setFound(boolean found) {
