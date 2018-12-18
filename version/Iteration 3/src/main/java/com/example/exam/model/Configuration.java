@@ -56,8 +56,8 @@ public class Configuration {
                 return locations[i+1];
             }
         }
-
-        return " ";
+//        Standard mappe Struktur
+        return locations[0];
     }
 
 

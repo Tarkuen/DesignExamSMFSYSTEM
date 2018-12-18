@@ -9,7 +9,9 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 @RunWith(Suite.class)
 
 @Suite.SuiteClasses(
-        ExamApplicationTests.class
+        {ExamApplicationTests.class,
+        ConfigurationTest.class,
+        MediatorTest.class}
 )
 
 public class TestSuiteAll {
